@@ -1,3 +1,5 @@
+from app.auth.service import authenticate_user
+from app.schemas.auth import LoginRequest, TokenResponse
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
@@ -29,3 +31,13 @@ def signup(
         )
 
     return create_user(db, user)
+
+@router.post(
+    "/login",
+    response_model=TokenResponse,
+)
+def login(
+    credentials: LoginRequest,
+    db: Session = Depends(get_db),
+):
+    return authenticate_user(db, credentials)
