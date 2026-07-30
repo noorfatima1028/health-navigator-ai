@@ -1,5 +1,7 @@
 from fastapi import APIRouter
 
+from app.api.v1.auth import router as auth_router
+
 router = APIRouter()
 
 
@@ -7,5 +9,8 @@ router = APIRouter()
 def health():
     return {
         "status": "healthy",
-        "service": "Health Navigator AI"
+        "service": "Health Navigator AI",
     }
+
+
+router.include_router(auth_router)
