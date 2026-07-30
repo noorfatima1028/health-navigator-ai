@@ -2,6 +2,8 @@ from fastapi import APIRouter
 
 from app.api.v1.auth import router as auth_router
 
+from app.api.v1.conversation import router as conversation_router
+
 router = APIRouter()
 
 
@@ -14,3 +16,4 @@ def health():
 
 
 router.include_router(auth_router)
+router.include_router(conversation_router)
