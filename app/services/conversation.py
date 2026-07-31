@@ -32,3 +32,16 @@ def get_user_conversations(
         )
         .all()
     )
+
+def get_conversation_by_id(
+    db: Session,
+    conversation_id: int,
+):
+
+    return (
+        db.query(Conversation)
+        .filter(
+            Conversation.id == conversation_id
+        )
+        .first()
+    )
