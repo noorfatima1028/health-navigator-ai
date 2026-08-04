@@ -9,9 +9,9 @@ class MessageCreate(BaseModel):
 
 class MessageResponse(BaseModel):
     id: int
-    role: str
+    sender: str
     content: str
-    created_at: datetime
+    timestamp: datetime
 
     model_config = ConfigDict(
         from_attributes=True,
