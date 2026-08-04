@@ -10,10 +10,9 @@ def create_message(
     role: str,
     content: str,
 ) -> Message:
-
     message = Message(
         conversation_id=conversation.id,
-        role=role,
+        sender=role,
         content=content,
     )
 
@@ -23,15 +22,14 @@ def create_message(
 
     return message
 
+
 def get_conversation_messages(
     db: Session,
     conversation: Conversation,
-):
+) -> list[Message]:
     return (
         db.query(Message)
-        .filter(
-            Message.conversation_id == conversation.id
-        )
-        .order_by(Message.created_at)
+        .filter(Message.conversation_id == conversation.id)
+        .order_by(Message.timestamp.asc())
         .all()
     )
